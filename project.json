@@ -1,0 +1,27 @@
+{
+  "project_id": "pdac-hypoxia-niche",
+  "repository_url": "https://github.com/baixvwyl/hypoxia",
+  "title": "PDAC Hypoxia niche",
+  "updated_on": "2026-11-16",
+  "phase": "literature_and_method_audit",
+  "study_design": {
+    "species": "mouse",
+    "groups": [
+      "T low",
+      "T high"
+    ],
+    "T_definition": "T细胞浸润；具体测量与阈值待补充",
+    "scrna_mice_per_group": 5,
+    "xenium_mice_per_group": 3,
+    "xenium_panel": "5K；实际基因列表待提供",
+    "pairing": "6只Xenium动物是10只scRNA动物的子集；跨模态按鼠配对",
+    "program_discovery": "用户描述为Omicos 3CA：每个大类内逐样本NMF，再跨样本获得一致性MP"
+  },
+  "source_papers": [
+    "P001",
+    "P002"
+  ],
+  "analysis_execution": "not_started",
+  "evidence_package": "reconstructions/starcat-xenium-review",
+  "framework_commit": "a36a5444d92e2a605bb12bf19956d2d7857ec865"
+}

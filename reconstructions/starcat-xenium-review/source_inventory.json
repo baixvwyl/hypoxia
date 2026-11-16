@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "starcat-xenium-review",
+  "sources": [
+    {
+      "source_id": "SRC001",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/macrophage-paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:d87ebb5fbd5c53e51172d941072e43905c9e24c000e96254455ef0d367c91008",
+      "locator_type": "line",
+      "limitations": [
+        "来自用户上传PDF的pdftotext -layout文本；双栏可能交错，须结合页码和原PDF检查。仅本地保存全文，不随公开仓库发布。"
+      ]
+    },
+    {
+      "source_id": "SRC002",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/macrophage-page7.png",
+      "availability": "available",
+      "fingerprint": "sha256:13d46d6bb9d9b4157c98a1458f7de5831cc269cd04e2f4409962abd4cb029612",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "由上传PDF第7页渲染；仅定性核查Fig.4，不从像素估算数值。仅本地保存。"
+      ]
+    },
+    {
+      "source_id": "SRC003",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/starcat-paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:4d44adb3a3e742633ebf82f18e609c2b4b2e4189c7c070b2eac8dccfbed70f98",
+      "locator_type": "line",
+      "limitations": [
+        "来自Europe PMC的PMC12446064 XML；段落含公式的LaTeX/XML展开与重复图注；未检查全部补充材料。仅本地保存全文。"
+      ]
+    },
+    {
+      "source_id": "SRC004",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/starcat.py",
+      "availability": "available",
+      "fingerprint": "sha256:b1b309ce915764693c97ef81447c4fb358e4446982d6043df8da03495fa47873",
+      "locator_type": "line",
+      "limitations": [
+        "固定公开提交5399183aa6093ff972bb605d2e33d64ce41b944c的静态源码；不是论文历史运行或巨噬细胞论文的分析脚本。"
+      ]
+    },
+    {
+      "source_id": "SRC005",
+      "roles": [
+        "methods_text",
+        "environment"
+      ],
+      "location": "sources/starCAT-README.md",
+      "availability": "available",
+      "fingerprint": "sha256:e1a025662dedb7d14cbe4c57002473f1b62a368eeb153f8de126e66a21ee17f6",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交的当前软件说明；其中测试依赖版本不是原论文运行环境。"
+      ]
+    }
+  ]
+}

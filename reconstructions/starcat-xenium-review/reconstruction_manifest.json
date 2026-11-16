@@ -1,0 +1,765 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "starcat-xenium-review",
+  "task": {
+    "mode": "reproduction_audit",
+    "request": "阅读用户提供的巨噬细胞全文和starCAT原论文；重点静态审查MAC_F4B与STAR_PROJECTION。无用户数据分析或生物学复现执行。",
+    "execution_requested": false,
+    "execution_scope": "none",
+    "target_ids": [
+      "MAC_F4B",
+      "STAR_PROJECTION"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "SRC001",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/macrophage-paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:d87ebb5fbd5c53e51172d941072e43905c9e24c000e96254455ef0d367c91008",
+      "locator_type": "line",
+      "limitations": [
+        "来自用户上传PDF的pdftotext -layout文本；双栏可能交错，须结合页码和原PDF检查。仅本地保存全文，不随公开仓库发布。"
+      ]
+    },
+    {
+      "source_id": "SRC002",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/macrophage-page7.png",
+      "availability": "available",
+      "fingerprint": "sha256:13d46d6bb9d9b4157c98a1458f7de5831cc269cd04e2f4409962abd4cb029612",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "由上传PDF第7页渲染；仅定性核查Fig.4，不从像素估算数值。仅本地保存。"
+      ]
+    },
+    {
+      "source_id": "SRC003",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/starcat-paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:4d44adb3a3e742633ebf82f18e609c2b4b2e4189c7c070b2eac8dccfbed70f98",
+      "locator_type": "line",
+      "limitations": [
+        "来自Europe PMC的PMC12446064 XML；段落含公式的LaTeX/XML展开与重复图注；未检查全部补充材料。仅本地保存全文。"
+      ]
+    },
+    {
+      "source_id": "SRC004",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/starcat.py",
+      "availability": "available",
+      "fingerprint": "sha256:b1b309ce915764693c97ef81447c4fb358e4446982d6043df8da03495fa47873",
+      "locator_type": "line",
+      "limitations": [
+        "固定公开提交5399183aa6093ff972bb605d2e33d64ce41b944c的静态源码；不是论文历史运行或巨噬细胞论文的分析脚本。"
+      ]
+    },
+    {
+      "source_id": "SRC005",
+      "roles": [
+        "methods_text",
+        "environment"
+      ],
+      "location": "sources/starCAT-README.md",
+      "availability": "available",
+      "fingerprint": "sha256:e1a025662dedb7d14cbe4c57002473f1b62a368eeb153f8de126e66a21ee17f6",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交的当前软件说明；其中测试依赖版本不是原论文运行环境。"
+      ]
+    }
+  ],
+  "stage_state": [
+    {
+      "stage": "evidence_inventory",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "source_inventory.json"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "cross_material_alignment",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "reconstruction_manifest.json",
+        "traceability.tsv"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "reproducibility_audit",
+      "status": "partial",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "reconstruction_manifest.json"
+      ],
+      "blockers": [
+        "MAC_C01",
+        "MAC_G01",
+        "MAC_G02",
+        "MAC_G03",
+        "STAR_G01",
+        "STAR_G02",
+        "STAR_G03"
+      ]
+    },
+    {
+      "stage": "execution_or_guidance",
+      "status": "not_started",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "biological_interpretation",
+      "status": "not_started",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "validation",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "validation_report.json"
+      ],
+      "blockers": []
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "MAC_F4B",
+      "modality": "scRNA-seq to Xenium myeloid program projection",
+      "paper_claim": {
+        "summary": "作者称scRNA来源的髓系程序在Xenium中呈现与已注释细胞群一致的usage分布。",
+        "evidence": [
+          {
+            "evidence_id": "MAC_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L263-L278",
+            "evidence_class": "直接证据",
+            "summary": "正文将cNMF程序用starCAT映射至Xenium，描述巨噬细胞身份与共享炎症程序；正文报告687个共同基因。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.4B"
+        ],
+        "source_mode": "visual_plus_caption",
+        "display_summary": "Fig.4B上方是Xenium髓系UMAP的程序usage分布，下方是按细胞群分组的小提琴图；这是表达程序图，不是组织坐标图。",
+        "evidence": [
+          {
+            "evidence_id": "MAC_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L323-L330",
+            "evidence_class": "直接证据",
+            "summary": "Fig.4B图注说明scRNA来源cNMF程序映射到Xenium的UMAP与usage小提琴图。"
+          },
+          {
+            "evidence_id": "MAC_V",
+            "lane": "figure",
+            "source_id": "SRC002",
+            "locator": "PDF p.7, Fig.4B",
+            "evidence_class": "直接证据",
+            "summary": "已查看原PDF渲染：巨噬细胞相关程序分布与群标签对应，炎症程序跨群分布；未读取原始数值。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods声明cNMF发现程序、donor Harmony校正、在原基因空间恢复谱，然后以starCAT投射Xenium；Methods共同基因为673，与正文不一致。",
+        "evidence": [
+          {
+            "evidence_id": "MAC_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L668-L691",
+            "evidence_class": "直接证据",
+            "summary": "cNMF v1.7.0、2000高变基因、K=5-30、每K200次、选K=7、密度阈值0.1、去除均值<0.02的usage7；starCAT v1.0.10；Methods称673/2000基因重叠。"
+          },
+          {
+            "evidence_id": "MAC_DESIGN",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L692-L720",
+            "evidence_class": "直接证据",
+            "summary": "Methods描述按donor聚合的pseudobulk差异表达及Xenium ResolVI注释；不能据此确认Fig.4程序投射的实际输入矩阵。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cnmf_version",
+            "value": "1.7.0",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "starcat_version",
+            "value": "1.0.10",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "high_variance_genes",
+            "value": 2000,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "K_search",
+            "value": "5-30",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "nmf_replicates_per_K",
+            "value": 200,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "selected_K",
+            "value": 7,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "density_threshold",
+            "value": 0.1,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "excluded_program_mean_cutoff",
+            "value": 0.02,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          },
+          {
+            "name": "overlap_genes_methods",
+            "value": 673,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MAC_M"
+            ]
+          }
+        ]
+      },
+      "code_locations": [],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "MAC_REF",
+            "path": "inputs/macrophage_reference.tsv",
+            "semantic_type": "作者实际使用的program-by-gene非负参考，未取得",
+            "fingerprint": null
+          },
+          {
+            "artifact_id": "MAC_QUERY",
+            "path": "inputs/xenium_myeloid_counts.h5ad",
+            "semantic_type": "作者投射用Xenium髓系细胞矩阵，矩阵层和校正状态待核对",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "MAC_USAGE",
+            "path": "outputs/xenium_program_usage.tsv",
+            "semantic_type": "论文Fig.4B所依据的cell-by-program usage原始结果，未取得",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "Methods给出Harmony和cNMF路线，但缺作者参考、查询矩阵层与活动脚本，无法确认尺度及标准化一致性。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "图中观测单位是细胞，供体是生物学重复；缺供体级输入与元数据，无法独立核实有效重复及使用细胞的选择。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "细胞与视野不能替代供体重复；Methods的pseudobulk方法不自动证明Fig.4投射已做供体外验证。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文声明以donor做批次校正，但未取得元数据及作者实际配置，无法审查供体、平台、细胞类型的混杂。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "Fig.4B是usage描述图，非明确检验；未取得下游比较的完整检验族与调用，不能推广为统计验证。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文对象是人正常乳腺；缺具体参考和query基因表，无法审查重复符号、注释版本或向小鼠转换损失。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "正文与Methods的重叠基因数不一致，且作者分析代码与运行日志缺失，参数一致性无法通过。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "图与正文支持作者所描述的程序分布一致性；未提供独立空间真值或本项目跨鼠预测证据，结论不能升级为小鼠映射已验证。",
+          "evidence_refs": [
+            "MAC_P",
+            "MAC_F",
+            "MAC_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "MAC_C01",
+          "kind": "conflict",
+          "topic": "gene_overlap",
+          "description": "正文报告687个共同基因（L268-L270），Methods报告673/2000（L689-L691）。",
+          "impact": "无法确定作者实际投射基因集合；需原始reference、query基因列表与运行日志，不能任选其一。",
+          "evidence_refs": [
+            "MAC_P",
+            "MAC_M"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "MAC_G01",
+          "kind": "gap",
+          "topic": "missing_analysis_code",
+          "description": "未取得巨噬细胞论文Fig.4B对应的作者分析脚本及历史环境锁；通用starCAT源码不能替代。",
+          "impact": "无法核对参考构建、具体矩阵层、调用参数与输出生成过程。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "MAC_G02",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "MAC_REF、MAC_QUERY及MAC_USAGE原始对象均未取得；没有执行或运行记录。",
+          "impact": "无法验证分割误差、基因重叠、数值结果与跨供体稳定性；缺失输入输出路径为预期占位，不代表存在。",
+          "evidence_refs": [
+            "MAC_M",
+            "MAC_F"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "MAC_G03",
+          "kind": "gap",
+          "topic": "missing_reproduction_parameters",
+          "description": "参考的完整权重与标准化、查询矩阵层、随机性处理及删程序后的重新归一方式未由作者脚本确认。",
+          "impact": "不能由Methods摘要生成声称忠实复现的运行指令。",
+          "evidence_refs": [
+            "MAC_M"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "材料冲突"
+    },
+    {
+      "analysis_id": "STAR_PROJECTION",
+      "modality": "fixed-reference nonnegative program usage estimation",
+      "paper_claim": {
+        "summary": "starCAT固定已发现的程序谱，估计新查询细胞中的非负usage；cNMF则同时学习谱与usage。",
+        "evidence": [
+          {
+            "evidence_id": "STAR_P",
+            "lane": "paper_claim",
+            "source_id": "SRC003",
+            "locator": "L26-L29",
+            "evidence_class": "直接证据",
+            "summary": "正文区分cNMF发现与starCAT投射，并报告模拟验证；该验证不是小鼠Xenium验证。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.1a"
+        ],
+        "source_mode": "caption_only",
+        "display_summary": "Fig.1a图注描述跨数据集发现和聚合程序后注释query，再计算附加评分或分类器；本次未查看此图原始视觉材料。",
+        "evidence": [
+          {
+            "evidence_id": "STAR_F",
+            "lane": "figure",
+            "source_id": "SRC003",
+            "locator": "L23",
+            "evidence_class": "直接证据",
+            "summary": "Fig.1a图注展示发现、聚合、query注释和派生分类的工作流。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods以固定谱的非负最小二乘求usage，query按基因标准差缩放，Frobenius误差及mu求解，最后逐细胞归一化usage。",
+        "evidence": [
+          {
+            "evidence_id": "STAR_M",
+            "lane": "method",
+            "source_id": "SRC003",
+            "locator": "L123-L126",
+            "evidence_class": "直接证据",
+            "summary": "starCAT algorithm：固定G，非负U；scikit-learn 1.1.3、Frobenius、mu、tol 1e-4、max_iter 1000；行归一至和为1。"
+          },
+          {
+            "evidence_id": "STAR_REF",
+            "lane": "method",
+            "source_id": "SRC003",
+            "locator": "L135-L141",
+            "evidence_class": "直接证据",
+            "summary": "共识参考构建使用经尺度标准化的谱及跨数据集程序平均；marker z-score表示与投射参考不同。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "beta_loss",
+            "value": "frobenius",
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          },
+          {
+            "name": "beta_loss",
+            "value": "frobenius",
+            "value_status": "implemented",
+            "evidence_refs": [
+              "STAR_CODE"
+            ],
+            "implementation_literal": "beta_loss='frobenius'"
+          },
+          {
+            "name": "solver",
+            "value": "mu",
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          },
+          {
+            "name": "solver",
+            "value": "mu",
+            "value_status": "implemented",
+            "evidence_refs": [
+              "STAR_CODE"
+            ],
+            "implementation_literal": "solver='mu'"
+          },
+          {
+            "name": "tol",
+            "value": 0.0001,
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          },
+          {
+            "name": "tol",
+            "value": 0.0001,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "STAR_CODE"
+            ],
+            "implementation_literal": "tol=1e-4"
+          },
+          {
+            "name": "max_iter",
+            "value": 1000,
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          },
+          {
+            "name": "max_iter",
+            "value": 1000,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "STAR_CODE"
+            ],
+            "implementation_literal": "max_iter=1000"
+          },
+          {
+            "name": "update_H",
+            "value": false,
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          },
+          {
+            "name": "update_H",
+            "value": false,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "STAR_CODE"
+            ],
+            "implementation_literal": "update_H = False"
+          },
+          {
+            "name": "paper_sklearn_version",
+            "value": "1.1.3",
+            "value_status": "reported",
+            "evidence_refs": [
+              "STAR_M"
+            ]
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "STAR_CODE",
+          "source_id": "SRC004",
+          "snapshot": "sha256:b1b309ce915764693c97ef81447c4fb358e4446982d6043df8da03495fa47873",
+          "path": "sources/starcat.py",
+          "locator": "L19-L26; L199-L290",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "STAR_REF_INPUT",
+            "path": "inputs/custom_reference.tsv",
+            "semantic_type": "program-by-gene非负谱；本文阅读未指定或获取可运行数值实例",
+            "fingerprint": null
+          },
+          {
+            "artifact_id": "STAR_QUERY_INPUT",
+            "path": "inputs/query_counts.h5ad",
+            "semantic_type": "cell-by-gene原始非负counts，须有可匹配基因ID",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "STAR_USAGE_OUTPUT",
+            "path": "outputs/query_usage.tsv",
+            "semantic_type": "cell-by-program usage；本次未执行，文件不存在",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "Methods与当前活动源码共同说明按基因缩放及固定谱求解，但缺真实输入，无法检查数值尺度和程序可分性。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "算法输出单位是细胞；相关生物学比较应以供体为独立单位，本次没有用于推断的样本元数据。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "论文模拟和人T细胞应用不构成小鼠的生物学重复；缺按鼠设计与数据，无法审查本项目伪重复。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "跨数据集共识参考并不自动消除query的平台差异；缺输入及批次表，不能核查实际混杂与泄漏。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "固定谱求usage本身不是假设检验；后续组间比较的检验族、样本设计与多重校正未提供。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "通用软件读取基因名交集，不执行可靠的人鼠同源映射；缺小鼠参考与面板，无法审核基因ID。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "核心求解参数可静态对应，但论文依赖版本与历史环境尚未锁定，不能声称所有参数均与历史运行一致。",
+          "evidence_refs": [
+            "STAR_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods支持发现与投射的概念区分；其人T细胞和模拟证据不能直接证明小鼠Xenium映射准确。",
+          "evidence_refs": [
+            "STAR_P",
+            "STAR_F",
+            "STAR_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "STAR_G01",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "STAR_REF_INPUT、STAR_QUERY_INPUT和STAR_USAGE_OUTPUT未取得，未运行程序。",
+          "impact": "本次是算法静态核查，不是数值复现；输入输出路径为预期占位。",
+          "evidence_refs": [
+            "STAR_M",
+            "STAR_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "STAR_G02",
+          "kind": "gap",
+          "topic": "historical_environment",
+          "description": "核查源码来自固定的当前提交，未绑定原论文分析的历史环境、输入对象与执行日志。",
+          "impact": "当前源码支持算法行为核对，不能证明发表时运行的全部参数和输出。",
+          "evidence_refs": [
+            "STAR_M",
+            "STAR_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "STAR_G03",
+          "kind": "gap",
+          "topic": "restricted_panel_transfer",
+          "description": "未取得用户的Omicos 3CA谱、MP成员关系、Xenium面板或按鼠表达矩阵。",
+          "impact": "当前不能验证小鼠MP转换后的尺度兼容性、面板可辨识性与真实跨平台表现。",
+          "evidence_refs": [
+            "STAR_REF",
+            "STAR_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "受阻"
+    }
+  ],
+  "execution_records": [],
+  "overall_status": "材料冲突"
+}

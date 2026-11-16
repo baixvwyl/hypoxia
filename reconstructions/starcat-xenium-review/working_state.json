@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "starcat-xenium-review",
+  "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+  "stages": [
+    {
+      "stage": "evidence_inventory",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "source_inventory.json"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "cross_material_alignment",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "reconstruction_manifest.json",
+        "traceability.tsv"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "reproducibility_audit",
+      "status": "partial",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "reconstruction_manifest.json"
+      ],
+      "blockers": [
+        "MAC_C01",
+        "MAC_G01",
+        "MAC_G02",
+        "MAC_G03",
+        "STAR_G01",
+        "STAR_G02",
+        "STAR_G03"
+      ]
+    },
+    {
+      "stage": "execution_or_guidance",
+      "status": "not_started",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "biological_interpretation",
+      "status": "not_started",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "validation",
+      "status": "completed",
+      "input_fingerprint": "sha256:d06ec0fb0901473eff4c815946f870b6a4d9f208ed901543f157d2d718b9263f",
+      "artifacts": [
+        "validation_report.json"
+      ],
+      "blockers": []
+    }
+  ],
+  "completed_artifacts": [
+    "source_inventory.json",
+    "working_state.json",
+    "reconstruction_manifest.json",
+    "traceability.tsv",
+    "REPORT.md"
+  ],
+  "invalidations": [],
+  "blockers": [
+    "MAC_C01",
+    "MAC_G01",
+    "MAC_G02",
+    "MAC_G03",
+    "STAR_G01",
+    "STAR_G02",
+    "STAR_G03"
+  ]
+}
