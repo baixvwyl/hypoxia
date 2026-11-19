@@ -1,0 +1,49 @@
+{
+  "validator": "dev-reconstruct-bioinfo-protocol/1.4.0",
+  "project_dir": "/workspace/work/hypoxia-layer-review/reconstructions/greenwald-2024-layers",
+  "valid": true,
+  "schema_validation": "passed",
+  "derived_statuses": {
+    "MP_ANNOTATION": {
+      "declared": "材料冲突",
+      "derived": "材料冲突",
+      "reasons": [
+        "one or more unresolved cross-material conflicts exist"
+      ]
+    },
+    "SPATIAL_ZONES": {
+      "declared": "受阻",
+      "derived": "受阻",
+      "reasons": [
+        "one or more unresolved blocking gaps exist",
+        "scientific audit is blocked: preprocessing, statistical_unit, replication_pseudoreplication, batch_confounding, multiple_testing, species_gene_ids, parameter_consistency",
+        "missing required material: existing fingerprinted input"
+      ]
+    },
+    "MULTISCALE_COUPLING": {
+      "declared": "材料冲突",
+      "derived": "材料冲突",
+      "reasons": [
+        "one or more unresolved cross-material conflicts exist"
+      ]
+    },
+    "CODEX_NEIGHBORHOODS": {
+      "declared": "材料冲突",
+      "derived": "材料冲突",
+      "reasons": [
+        "one or more unresolved cross-material conflicts exist"
+      ]
+    },
+    "LAYER_GRAPH": {
+      "declared": "材料冲突",
+      "derived": "材料冲突",
+      "reasons": [
+        "one or more unresolved cross-material conflicts exist"
+      ]
+    }
+  },
+  "derived_overall_status": "材料冲突",
+  "errors": [],
+  "warnings": [],
+  "scope_note": "Contract, receipt, on-disk path, SHA-256, linkage, and provenance validation only. The receipt is not signed: a writer controlling the whole project can fabricate it. A passing validator therefore does not prove process-to-artifact causality or scientific correctness; retain independent runtime/job logs and expert review."
+}

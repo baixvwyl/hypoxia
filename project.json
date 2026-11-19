@@ -2,7 +2,7 @@
   "project_id": "pdac-hypoxia-niche",
   "repository_url": "https://github.com/baixvwyl/hypoxia",
   "title": "PDAC Hypoxia niche",
-  "updated_on": "2026-11-16",
+  "updated_on": "2026-11-19",
   "phase": "literature_and_method_audit",
   "study_design": {
     "species": "mouse",
@@ -15,13 +15,19 @@
     "xenium_mice_per_group": 3,
     "xenium_panel": "5K；实际基因列表待提供",
     "pairing": "6只Xenium动物是10只scRNA动物的子集；跨模态按鼠配对",
-    "program_discovery": "用户描述为Omicos 3CA：每个大类内逐样本NMF，再跨样本获得一致性MP"
+    "program_discovery": "用户描述为Omicos 3CA：每个大类内逐样本NMF，再跨样本获得一致性MP",
+    "program_discovery_audit": "用户上传只读报告称NMF输入为logTP10K后基因中心化与负值截断；完整非负basis不自动兼容starCAT。尚未直接核查用户矩阵及原始运行。"
   },
   "source_papers": [
     "P001",
-    "P002"
+    "P002",
+    "P003"
   ],
   "analysis_execution": "not_started",
   "evidence_package": "reconstructions/starcat-xenium-review",
-  "framework_commit": "a36a5444d92e2a605bb12bf19956d2d7857ec865"
+  "framework_commit": "a36a5444d92e2a605bb12bf19956d2d7857ec865",
+  "evidence_packages": [
+    "reconstructions/starcat-xenium-review",
+    "reconstructions/greenwald-2024-layers"
+  ]
 }

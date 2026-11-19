@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "greenwald-2024-layers",
+  "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+  "stages": [
+    {
+      "stage": "evidence_inventory",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "source_inventory.json"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "cross_material_alignment",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "reconstruction_manifest.json",
+        "traceability.tsv"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "reproducibility_audit",
+      "status": "partial",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "reconstruction_manifest.json"
+      ],
+      "blockers": [
+        "MP_C01",
+        "MP_G01",
+        "ZONE_G01",
+        "ZONE_G02",
+        "COUP_C01",
+        "COUP_C02",
+        "COUP_G01",
+        "CODEX_C01",
+        "CODEX_G01",
+        "LAYER_C01",
+        "LAYER_G01",
+        "LAYER_G02"
+      ]
+    },
+    {
+      "stage": "execution_or_guidance",
+      "status": "not_started",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "biological_interpretation",
+      "status": "not_started",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "validation",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "validation_report.json"
+      ],
+      "blockers": []
+    }
+  ],
+  "completed_artifacts": [
+    "source_inventory.json",
+    "working_state.json",
+    "reconstruction_manifest.json",
+    "traceability.tsv",
+    "REPORT.md"
+  ],
+  "invalidations": [],
+  "blockers": [
+    "MP_C01",
+    "MP_G01",
+    "ZONE_G01",
+    "ZONE_G02",
+    "COUP_C01",
+    "COUP_C02",
+    "COUP_G01",
+    "CODEX_C01",
+    "CODEX_G01",
+    "LAYER_C01",
+    "LAYER_G01",
+    "LAYER_G02"
+  ]
+}

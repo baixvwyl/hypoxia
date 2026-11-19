@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "greenwald-2024-layers",
+  "sources": [
+    {
+      "source_id": "SRC001",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:7b4d8be81f9f02c39bd8ff8fbe831fad45956b004cc743cc21115aa2da761daf",
+      "locator_type": "line",
+      "limitations": [
+        "PMC11088502作者稿HTML的段落提取；图注存在重复，公式排版被展平；不是Cell排版PDF。补充材料未完整核查。"
+      ]
+    },
+    {
+      "source_id": "SRC002",
+      "roles": [
+        "main_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/paper-pmc.html",
+      "availability": "available",
+      "fingerprint": "sha256:e3334ac41cd5457a1dadfa087a551aa2165753a57f5cd03a5cf416ef5857abc8",
+      "locator_type": "html_anchor",
+      "limitations": [
+        "PMC全文原始抓取；文章页含网站导航；出版商页面不可读取时使用该作者稿。"
+      ]
+    },
+    {
+      "source_id": "SRC003",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F4.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:6ddc53a199f0f62070bc8c06d273e6dd3034ca36eedfeb3f5520b61801ab3518",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.4空间一致性、组织区域与相关性；不从像素估算原始数值。"
+      ]
+    },
+    {
+      "source_id": "SRC004",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F5.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:9870cf2c119b66a744b0e3e7bc91e7eabbf369366792f1821886e2d6400fdbf4",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.5多尺度耦合示意与比较；没有原始结果表。"
+      ]
+    },
+    {
+      "source_id": "SRC005",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F6.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:69a3d50cb2ee1bb76976b8354d6f76542e918af73b707224ea9130f3d8613e2d",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.6层次网络、组织图像与示意；示意环不是所有组织的实测等距离层。"
+      ]
+    },
+    {
+      "source_id": "SRC006",
+      "roles": [
+        "methods_text",
+        "environment"
+      ],
+      "location": "sources/author/README.md",
+      "availability": "available",
+      "fingerprint": "sha256:cf8004e870dfceec498bc039b1555caf6d4a7de4dcad61dfded386f8b0f7b4e1",
+      "locator_type": "line",
+      "limitations": [
+        "作者提供Inputs.zip及R测试版本；本次未下载输入压缩包、未锁定完整依赖环境。"
+      ]
+    },
+    {
+      "source_id": "SRC007",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module1_MP.R",
+      "availability": "available",
+      "fingerprint": "sha256:6f367cc1c887801cadc0511cd70e5fb94a9b6be776f790866f78896f12fb9750",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC008",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module2_spatial_coherence_org_zones.R",
+      "availability": "available",
+      "fingerprint": "sha256:e49a302c9f928676655c14f3e0f2188be5a389b4d5d67723eb9c9c0100e74ea4",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC009",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module3_spatial_associations.R",
+      "availability": "available",
+      "fingerprint": "sha256:ec0640875465de84cfcc0b94827910d07a8f5e3c229e60abdad0e679fcb607a7",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC010",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module4_consensus_interactions.R",
+      "availability": "available",
+      "fingerprint": "sha256:4bcdb4846114caf5d3ada4fc5125604c0d3a12c4427562f690ec2fb9a6022955",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC011",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module6_CODEX.R",
+      "availability": "available",
+      "fingerprint": "sha256:8dc822bb3bc4bf11e1e342b6f5383bc8e410eea39951781bd7fe082ad4d5670d",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC012",
+      "roles": [
+        "methods_text"
+      ],
+      "location": "sources/user-3ca-audit.txt",
+      "availability": "available",
+      "fingerprint": "sha256:2c271c321a3c4bd630d18a210466467c614b6b7b6eeb5841f40d8cf4391e9787",
+      "locator_type": "line",
+      "limitations": [
+        "用户上传的只读3CA溯源报告；本次未直接复核其底层脚本、矩阵及运行记录，不作为论文方法证据。"
+      ]
+    }
+  ]
+}

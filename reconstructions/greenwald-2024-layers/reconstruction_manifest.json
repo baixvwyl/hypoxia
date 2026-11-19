@@ -1,0 +1,1503 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "greenwald-2024-layers",
+  "task": {
+    "mode": "reproduction_audit",
+    "request": "阅读Greenwald等Cell2024论文，核对layer流程的Methods及作者固定代码，判断对小鼠PDAC单细胞至Xenium映射的适用边界；没有请求或执行生物学数据分析。",
+    "execution_requested": false,
+    "execution_scope": "none",
+    "target_ids": [
+      "MP_ANNOTATION",
+      "SPATIAL_ZONES",
+      "MULTISCALE_COUPLING",
+      "CODEX_NEIGHBORHOODS",
+      "LAYER_GRAPH"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "SRC001",
+      "roles": [
+        "main_text",
+        "results_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/paper.txt",
+      "availability": "available",
+      "fingerprint": "sha256:7b4d8be81f9f02c39bd8ff8fbe831fad45956b004cc743cc21115aa2da761daf",
+      "locator_type": "line",
+      "limitations": [
+        "PMC11088502作者稿HTML的段落提取；图注存在重复，公式排版被展平；不是Cell排版PDF。补充材料未完整核查。"
+      ]
+    },
+    {
+      "source_id": "SRC002",
+      "roles": [
+        "main_text",
+        "methods_text",
+        "figure_caption"
+      ],
+      "location": "sources/paper-pmc.html",
+      "availability": "available",
+      "fingerprint": "sha256:e3334ac41cd5457a1dadfa087a551aa2165753a57f5cd03a5cf416ef5857abc8",
+      "locator_type": "html_anchor",
+      "limitations": [
+        "PMC全文原始抓取；文章页含网站导航；出版商页面不可读取时使用该作者稿。"
+      ]
+    },
+    {
+      "source_id": "SRC003",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F4.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:6ddc53a199f0f62070bc8c06d273e6dd3034ca36eedfeb3f5520b61801ab3518",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.4空间一致性、组织区域与相关性；不从像素估算原始数值。"
+      ]
+    },
+    {
+      "source_id": "SRC004",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F5.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:9870cf2c119b66a744b0e3e7bc91e7eabbf369366792f1821886e2d6400fdbf4",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.5多尺度耦合示意与比较；没有原始结果表。"
+      ]
+    },
+    {
+      "source_id": "SRC005",
+      "roles": [
+        "figure_visual"
+      ],
+      "location": "sources/F6.jpg",
+      "availability": "available",
+      "fingerprint": "sha256:69a3d50cb2ee1bb76976b8354d6f76542e918af73b707224ea9130f3d8613e2d",
+      "locator_type": "figure_panel",
+      "limitations": [
+        "查看Fig.6层次网络、组织图像与示意；示意环不是所有组织的实测等距离层。"
+      ]
+    },
+    {
+      "source_id": "SRC006",
+      "roles": [
+        "methods_text",
+        "environment"
+      ],
+      "location": "sources/author/README.md",
+      "availability": "available",
+      "fingerprint": "sha256:cf8004e870dfceec498bc039b1555caf6d4a7de4dcad61dfded386f8b0f7b4e1",
+      "locator_type": "line",
+      "limitations": [
+        "作者提供Inputs.zip及R测试版本；本次未下载输入压缩包、未锁定完整依赖环境。"
+      ]
+    },
+    {
+      "source_id": "SRC007",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module1_MP.R",
+      "availability": "available",
+      "fingerprint": "sha256:6f367cc1c887801cadc0511cd70e5fb94a9b6be776f790866f78896f12fb9750",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC008",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module2_spatial_coherence_org_zones.R",
+      "availability": "available",
+      "fingerprint": "sha256:e49a302c9f928676655c14f3e0f2188be5a389b4d5d67723eb9c9c0100e74ea4",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC009",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module3_spatial_associations.R",
+      "availability": "available",
+      "fingerprint": "sha256:ec0640875465de84cfcc0b94827910d07a8f5e3c229e60abdad0e679fcb607a7",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC010",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module4_consensus_interactions.R",
+      "availability": "available",
+      "fingerprint": "sha256:4bcdb4846114caf5d3ada4fc5125604c0d3a12c4427562f690ec2fb9a6022955",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC011",
+      "roles": [
+        "code"
+      ],
+      "location": "sources/author/Module6_CODEX.R",
+      "availability": "available",
+      "fingerprint": "sha256:8dc822bb3bc4bf11e1e342b6f5383bc8e410eea39951781bd7fe082ad4d5670d",
+      "locator_type": "line",
+      "limitations": [
+        "固定提交f38f9b60ddbeefd9739e1483cbc66b2650f931d3的静态工作脚本；没有历史运行日志及输入对象，不证明所有代码块参与最终发表结果。"
+      ]
+    },
+    {
+      "source_id": "SRC012",
+      "roles": [
+        "methods_text"
+      ],
+      "location": "sources/user-3ca-audit.txt",
+      "availability": "available",
+      "fingerprint": "sha256:2c271c321a3c4bd630d18a210466467c614b6b7b6eeb5841f40d8cf4391e9787",
+      "locator_type": "line",
+      "limitations": [
+        "用户上传的只读3CA溯源报告；本次未直接复核其底层脚本、矩阵及运行记录，不作为论文方法证据。"
+      ]
+    }
+  ],
+  "stage_state": [
+    {
+      "stage": "evidence_inventory",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "source_inventory.json"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "cross_material_alignment",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "reconstruction_manifest.json",
+        "traceability.tsv"
+      ],
+      "blockers": []
+    },
+    {
+      "stage": "reproducibility_audit",
+      "status": "partial",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "reconstruction_manifest.json"
+      ],
+      "blockers": [
+        "MP_C01",
+        "MP_G01",
+        "ZONE_G01",
+        "ZONE_G02",
+        "COUP_C01",
+        "COUP_C02",
+        "COUP_G01",
+        "CODEX_C01",
+        "CODEX_G01",
+        "LAYER_C01",
+        "LAYER_G01",
+        "LAYER_G02"
+      ]
+    },
+    {
+      "stage": "execution_or_guidance",
+      "status": "not_started",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "biological_interpretation",
+      "status": "not_started",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [],
+      "blockers": []
+    },
+    {
+      "stage": "validation",
+      "status": "completed",
+      "input_fingerprint": "sha256:2aab8fbe1c9062455e1ab09515a84a7aeed58b211fc9a9f2c7022ea9141ede22",
+      "artifacts": [
+        "validation_report.json"
+      ],
+      "blockers": []
+    }
+  ],
+  "analyses": [
+    {
+      "analysis_id": "MP_ANNOTATION",
+      "modality": "Visium per-sample program discovery and spot annotation",
+      "paper_claim": {
+        "summary": "作者由逐样本NMF及Leiden程序汇总获得跨样本MP，并将其用于spot细胞状态注释。",
+        "evidence": [
+          {
+            "evidence_id": "MP_ANNOTATION_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L54-L61",
+            "evidence_class": "直接证据",
+            "summary": "作者由逐样本NMF及Leiden程序汇总获得跨样本MP，并将其用于spot细胞状态注释。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.2A-C"
+        ],
+        "source_mode": "caption_only",
+        "display_summary": "图注展示逐样本程序、基因重叠聚类和共识MP；本次未查看Fig.2原图。",
+        "evidence": [
+          {
+            "evidence_id": "MP_ANNOTATION_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L57-L58",
+            "evidence_class": "直接证据",
+            "summary": "图注展示逐样本程序、基因重叠聚类和共识MP；本次未查看Fig.2原图。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods报告每样本中心化后负值截断，NMF跨K发现top50程序，筛选稳健程序并与Leiden合并；之后以基因集评分注释spot。",
+        "evidence": [
+          {
+            "evidence_id": "MP_ANNOTATION_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L140-L150; L163-L170",
+            "evidence_class": "直接证据",
+            "summary": "Methods报告每样本中心化后负值截断，NMF跨K发现top50程序，筛选稳健程序并与Leiden合并；之后以基因集评分注释spot。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "K_range",
+            "value": "2-11",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MP_ANNOTATION_M"
+            ]
+          },
+          {
+            "name": "program_genes",
+            "value": 50,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MP_ANNOTATION_M"
+            ]
+          },
+          {
+            "name": "within_sample_overlap",
+            "value": 30,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MP_ANNOTATION_M"
+            ]
+          },
+          {
+            "name": "cross_sample_overlap_fraction",
+            "value": 0.2,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MP_ANNOTATION_M"
+            ]
+          },
+          {
+            "name": "within_sample_overlap",
+            "value": 35,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "MP_CODE"
+            ],
+            "implementation_literal": "intra_min = 35"
+          },
+          {
+            "name": "nmf_repeats",
+            "value": 5,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "MP_CODE"
+            ],
+            "implementation_literal": "nrun = 5"
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "MP_CODE",
+          "source_id": "SRC007",
+          "snapshot": "sha256:6f367cc1c887801cadc0511cd70e5fb94a9b6be776f790866f78896f12fb9750",
+          "path": "sources/author/Module1_MP.R",
+          "locator": "L230-L241; L260-L266; L275-L355; L618-L648",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "MP_ANNOTATION_IN1",
+            "path": "inputs/visium_counts_and_programs.rds",
+            "semantic_type": "作者表达矩阵、程序及预计算MP对象；尚未获取Inputs.zip内容",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "MP_ANNOTATION_OUT1",
+            "path": "outputs/spot_mp_scores_labels.tsv",
+            "semantic_type": "作者spot分数与主状态注释；原始结果未取得，本次未生成",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "已核查Methods与活动脚本所声明的输入变换及统计语义，但作者实际输入和中间对象尚未取得，不能确认完整处理链。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M",
+            "MP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "细胞、spot、窗口及切片是不同观测层次，独立生物学单位应是患者；缺样本元数据，不能由切片数推断独立患者数。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "同肿瘤多块取样和重叠窗口产生依赖；没有取得实际样本和结果表，无法复核重复测量处理及伪重复风险。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文逐样本计算再汇总，但患者、切片、区域、平台和批次覆盖尚未取得，不能确认混杂已被设计或模型控制。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "已核查相关Methods与脚本，未取得完整检验族、最终p值表和运行配置，不能确认跨状态对及尺度的多重检验控制。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M",
+            "MP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文使用人GBM及GRCh38，用户是小鼠PDAC；缺实际基因、注释和面板列表，不能确认物种映射与程序特异性。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "已将活动实现与Methods逐项对应；尚有参数或公式差异以及缺失的输入和历史环境，参数一致性不能判为通过。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M",
+            "MP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods可支持作者报告的组织关联及分析设计；不构成小鼠PDAC映射、五层普适性或缺氧因果作用的验证。",
+          "evidence_refs": [
+            "MP_ANNOTATION_P",
+            "MP_ANNOTATION_F",
+            "MP_ANNOTATION_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "MP_C01",
+          "kind": "conflict",
+          "topic": "parameter_consistency",
+          "description": "Methods同样本稳健重叠为30/50，Module1活动调用intra_min=35，函数默认则为30。",
+          "impact": "不能静默选用其中一个；后续重新读入预计算对象，发表结果实际参数仍需输入及日志确认。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M",
+            "MP_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "MP_G01",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "作者公开Inputs.zip尚未获取；表达、预计算MP、最终注释和历史运行记录缺失，列出路径均为预期占位。",
+          "impact": "无法确认预计算RDS由哪套参数产生，也未验证spot注释准确性。",
+          "evidence_refs": [
+            "MP_ANNOTATION_M",
+            "MP_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "材料冲突"
+    },
+    {
+      "analysis_id": "SPATIAL_ZONES",
+      "modality": "Visium spatial coherence and organizational zones",
+      "paper_claim": {
+        "summary": "作者描述有序与无序组织区域，并报告缺氧相关MES-Hyp丰度与其他状态的空间一致性相关。",
+        "evidence": [
+          {
+            "evidence_id": "SPATIAL_ZONES_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L74-L83",
+            "evidence_class": "直接证据",
+            "summary": "作者描述有序与无序组织区域，并报告缺氧相关MES-Hyp丰度与其他状态的空间一致性相关。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.4A-G"
+        ],
+        "source_mode": "visual_plus_caption",
+        "display_summary": "Fig.4展示同类状态聚集度、样本差异、有序/无序区域及与MES-Hyp丰度的比较，不是五层标签。",
+        "evidence": [
+          {
+            "evidence_id": "SPATIAL_ZONES_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L76-L77",
+            "evidence_class": "直接证据",
+            "summary": "Fig.4展示同类状态聚集度、样本差异、有序/无序区域及与MES-Hyp丰度的比较，不是五层标签。"
+          },
+          {
+            "evidence_id": "SPATIAL_ZONES_V",
+            "lane": "figure",
+            "source_id": "SRC003",
+            "locator": "Fig.4A-G",
+            "evidence_class": "直接证据",
+            "summary": "已查看该图原始JPG；定性核对面板构成，不估计原始数值。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods以同MP直接邻居数对随机和理想聚集基线归一；用多个六边形窗口与全样本分位数判定区域，再平滑并按CNA分层。",
+        "evidence": [
+          {
+            "evidence_id": "SPATIAL_ZONES_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L174-L180",
+            "evidence_class": "直接证据",
+            "summary": "Methods以同MP直接邻居数对随机和理想聚集基线归一；用多个六边形窗口与全样本分位数判定区域，再平滑并按CNA分层。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "global_coherence_shuffles",
+            "value": 100,
+            "value_status": "reported",
+            "evidence_refs": [
+              "SPATIAL_ZONES_M"
+            ]
+          },
+          {
+            "name": "zone_window_radii",
+            "value": [
+              5,
+              8,
+              11
+            ],
+            "value_status": "reported",
+            "evidence_refs": [
+              "SPATIAL_ZONES_M"
+            ]
+          },
+          {
+            "name": "zone_quantile",
+            "value": 0.4,
+            "value_status": "reported",
+            "evidence_refs": [
+              "SPATIAL_ZONES_M"
+            ]
+          },
+          {
+            "name": "smoothing_radius",
+            "value": 4,
+            "value_status": "reported",
+            "evidence_refs": [
+              "SPATIAL_ZONES_M"
+            ]
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "ZONE_CODE",
+          "source_id": "SRC008",
+          "snapshot": "sha256:e49a302c9f928676655c14f3e0f2188be5a389b4d5d67723eb9c9c0100e74ea4",
+          "path": "sources/author/Module2_spatial_coherence_org_zones.R",
+          "locator": "L19-L69; L219-L290; L300-L486",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "SPATIAL_ZONES_IN1",
+            "path": "inputs/spot_annotations_coordinates_cna.rds",
+            "semantic_type": "作者spot状态、六边形坐标、CNA及样本身份，未获取",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "SPATIAL_ZONES_OUT1",
+            "path": "outputs/coherence_zones.tsv",
+            "semantic_type": "原作者一致性分数及最终区域；本次未生成",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "已核查Methods与活动脚本所声明的输入变换及统计语义，但作者实际输入和中间对象尚未取得，不能确认完整处理链。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M",
+            "ZONE_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "细胞、spot、窗口及切片是不同观测层次，独立生物学单位应是患者；缺样本元数据，不能由切片数推断独立患者数。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "同肿瘤多块取样和重叠窗口产生依赖；没有取得实际样本和结果表，无法复核重复测量处理及伪重复风险。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文逐样本计算再汇总，但患者、切片、区域、平台和批次覆盖尚未取得，不能确认混杂已被设计或模型控制。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "已核查相关Methods与脚本，未取得完整检验族、最终p值表和运行配置，不能确认跨状态对及尺度的多重检验控制。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M",
+            "ZONE_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文使用人GBM及GRCh38，用户是小鼠PDAC；缺实际基因、注释和面板列表，不能确认物种映射与程序特异性。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "Methods与代码可定位主要窗口参数，但局部归一分支、预计算对象和历史环境尚未确认，不能证明最终输出完全一致。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M",
+            "ZONE_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods可支持作者报告的组织关联及分析设计；不构成小鼠PDAC映射、五层普适性或缺氧因果作用的验证。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_P",
+            "SPATIAL_ZONES_F",
+            "SPATIAL_ZONES_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "ZONE_G01",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "缺spot注释、组织边界、CNA、鼠/患者及切片元数据与输出对象；路径是预期占位。",
+          "impact": "无法复算分位数、区域构成、同患者重复及最终统计结果。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M",
+            "ZONE_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "ZONE_G02",
+          "kind": "gap",
+          "topic": "implementation_details",
+          "description": "代码局部计算对高丰度程序改变归一方式并有最少spot数等分支；未取得实际中间对象和执行环境。",
+          "impact": "Methods简述不足以唯一重建活动脚本输出，不能直接将六边形窗口搬到Xenium。",
+          "evidence_refs": [
+            "SPATIAL_ZONES_M",
+            "ZONE_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "受阻"
+    },
+    {
+      "analysis_id": "MULTISCALE_COUPLING",
+      "modality": "Visium within-spot, adjacency and regional associations",
+      "paper_claim": {
+        "summary": "作者称细胞状态对关系在跨样本和多个空间尺度上重复，部分状态对呈尺度依赖的耦合或排斥。",
+        "evidence": [
+          {
+            "evidence_id": "MULTISCALE_COUPLING_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L85-L92",
+            "evidence_class": "直接证据",
+            "summary": "作者称细胞状态对关系在跨样本和多个空间尺度上重复，部分状态对呈尺度依赖的耦合或排斥。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.5A-F"
+        ],
+        "source_mode": "visual_plus_caption",
+        "display_summary": "Fig.5区分同点共定位、直接邻接与区域组成，展示不同尺度的耦合及CODEX对照。",
+        "evidence": [
+          {
+            "evidence_id": "MULTISCALE_COUPLING_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L87-L88",
+            "evidence_class": "直接证据",
+            "summary": "Fig.5区分同点共定位、直接邻接与区域组成，展示不同尺度的耦合及CODEX对照。"
+          },
+          {
+            "evidence_id": "MULTISCALE_COUPLING_V",
+            "lane": "figure",
+            "source_id": "SRC004",
+            "locator": "Fig.5A-F",
+            "evidence_class": "直接证据",
+            "summary": "已查看该图原始JPG；定性核对面板构成，不估计原始数值。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods将score>0.1作为spot内MP出现，计算同点、邻接及r=1-15区域组成关系；使用打乱基线，声明Fisher精确检验和expected/observed共定位效应。",
+        "evidence": [
+          {
+            "evidence_id": "MULTISCALE_COUPLING_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L182-L190",
+            "evidence_class": "直接证据",
+            "summary": "Methods将score>0.1作为spot内MP出现，计算同点、邻接及r=1-15区域组成关系；使用打乱基线，声明Fisher精确检验和expected/observed共定位效应。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "presence_score_cutoff",
+            "value": 0.1,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          },
+          {
+            "name": "colocalization_shuffles",
+            "value": 500,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          },
+          {
+            "name": "adjacency_shuffles",
+            "value": 10000,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          },
+          {
+            "name": "regional_radii",
+            "value": "1-15",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          },
+          {
+            "name": "regional_shuffles",
+            "value": 500,
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          },
+          {
+            "name": "colocalization_effect_definition",
+            "value": "expected/observed",
+            "value_status": "reported",
+            "evidence_refs": [
+              "MULTISCALE_COUPLING_M"
+            ]
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "COUP_CODE",
+          "source_id": "SRC009",
+          "snapshot": "sha256:ec0640875465de84cfcc0b94827910d07a8f5e3c229e60abdad0e679fcb607a7",
+          "path": "sources/author/Module3_spatial_associations.R",
+          "locator": "L47-L113; L184-L191; L213-L435; L445-L484; L761-L965",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "MULTISCALE_COUPLING_IN1",
+            "path": "inputs/spot_deconvolution_and_coordinates.rds",
+            "semantic_type": "作者逐样本MP出现矩阵、主状态、区域身份及坐标，未获取",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "MULTISCALE_COUPLING_OUT1",
+            "path": "outputs/pairwise_multiscale_scores.tsv",
+            "semantic_type": "作者逐样本状态对效应、显著性及尺度结果，未取得",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "已核查Methods与活动脚本所声明的输入变换及统计语义，但作者实际输入和中间对象尚未取得，不能确认完整处理链。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "细胞、spot、窗口及切片是不同观测层次，独立生物学单位应是患者；缺样本元数据，不能由切片数推断独立患者数。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "同肿瘤多块取样和重叠窗口产生依赖；没有取得实际样本和结果表，无法复核重复测量处理及伪重复风险。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文逐样本计算再汇总，但患者、切片、区域、平台和批次覆盖尚未取得，不能确认混杂已被设计或模型控制。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "已核查相关Methods与脚本，未取得完整检验族、最终p值表和运行配置，不能确认跨状态对及尺度的多重检验控制。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文使用人GBM及GRCh38，用户是小鼠PDAC；缺实际基因、注释和面板列表，不能确认物种映射与程序特异性。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "已将活动实现与Methods逐项对应；尚有参数或公式差异以及缺失的输入和历史环境，参数一致性不能判为通过。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods可支持作者报告的组织关联及分析设计；不构成小鼠PDAC映射、五层普适性或缺氧因果作用的验证。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_P",
+            "MULTISCALE_COUPLING_F",
+            "MULTISCALE_COUPLING_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "COUP_C01",
+          "kind": "conflict",
+          "topic": "effect_direction",
+          "description": "Methods写共定位效应expected/observed，活动代码r1为observed、r2为expected并计算r1/r2。",
+          "impact": "富集效应方向相反，必须保留差异并核实作者实际结果，不能静默修正Methods。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "COUP_C02",
+          "kind": "conflict",
+          "topic": "statistical_test",
+          "description": "Methods称Fisher精确检验，共定位和区域相关活动代码使用Fisher z形式变换与正态尾概率。",
+          "impact": "检验实现与文字声明不同；共定位指标及重叠窗口的分布假设和有效样本量需另行论证。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "COUP_G01",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "未获取作者实际输入、分区运行配置、逐样本结果和完整检验族；占位路径不存在。",
+          "impact": "不能验证跨样本关系、p值、多重校正、零模型或与论文图的对应。",
+          "evidence_refs": [
+            "MULTISCALE_COUPLING_M",
+            "COUP_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "材料冲突"
+    },
+    {
+      "analysis_id": "CODEX_NEIGHBORHOODS",
+      "modality": "CODEX cell-level neighborhood associations",
+      "paper_claim": {
+        "summary": "作者以空间蛋白单细胞观测补充Visium状态关系，并支持部分肿瘤与免疫状态的空间耦合。",
+        "evidence": [
+          {
+            "evidence_id": "CODEX_NEIGHBORHOODS_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L83-L92",
+            "evidence_class": "直接证据",
+            "summary": "作者以空间蛋白单细胞观测补充Visium状态关系，并支持部分肿瘤与免疫状态的空间耦合。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.5D-F"
+        ],
+        "source_mode": "visual_plus_caption",
+        "display_summary": "Fig.5D为蛋白图像示例，E包含CODEX耦合汇总，F包括T细胞等状态关联；不能据图断言实际计数分母。",
+        "evidence": [
+          {
+            "evidence_id": "CODEX_NEIGHBORHOODS_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L87-L88",
+            "evidence_class": "直接证据",
+            "summary": "Fig.5D为蛋白图像示例，E包含CODEX耦合汇总，F包括T细胞等状态关联；不能据图断言实际计数分母。"
+          },
+          {
+            "evidence_id": "CODEX_NEIGHBORHOODS_V",
+            "lane": "figure",
+            "source_id": "SRC004",
+            "locator": "Fig.5D-F",
+            "evidence_class": "直接证据",
+            "summary": "已查看该图原始JPG；定性核对面板构成，不估计原始数值。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods按细胞质心建立指定物理半径邻域，排除单一状态占优势的邻域；按A细胞数量归一B邻居计数，并做标签打乱。",
+        "evidence": [
+          {
+            "evidence_id": "CODEX_NEIGHBORHOODS_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L209-L219",
+            "evidence_class": "直接证据",
+            "summary": "Methods按细胞质心建立指定物理半径邻域，排除单一状态占优势的邻域；按A细胞数量归一B邻居计数，并做标签打乱。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "neighborhood_radii_um",
+            "value": [
+              27.5,
+              127.5
+            ],
+            "value_status": "reported",
+            "evidence_refs": [
+              "CODEX_NEIGHBORHOODS_M"
+            ]
+          },
+          {
+            "name": "dominant_neighborhood_fraction",
+            "value": 0.8,
+            "value_status": "reported",
+            "evidence_refs": [
+              "CODEX_NEIGHBORHOODS_M"
+            ]
+          },
+          {
+            "name": "label_shuffles",
+            "value": 500,
+            "value_status": "reported",
+            "evidence_refs": [
+              "CODEX_NEIGHBORHOODS_M"
+            ]
+          },
+          {
+            "name": "active_radius_um",
+            "value": 27.5,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "CODEX_CODE"
+            ],
+            "implementation_literal": "radius = 27.5"
+          },
+          {
+            "name": "label_shuffles",
+            "value": 500,
+            "value_status": "implemented",
+            "evidence_refs": [
+              "CODEX_CODE"
+            ],
+            "implementation_literal": "iter = 500"
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "CODEX_CODE",
+          "source_id": "SRC011",
+          "snapshot": "sha256:8dc822bb3bc4bf11e1e342b6f5383bc8e410eea39951781bd7fe082ad4d5670d",
+          "path": "sources/author/Module6_CODEX.R",
+          "locator": "L361-L435; L785-L789; L885-L945",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "CODEX_NEIGHBORHOODS_IN1",
+            "path": "inputs/codex_cells_coordinates.tsv",
+            "semantic_type": "作者CODEX分割细胞、状态、坐标及样本元数据，未获取",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "CODEX_NEIGHBORHOODS_OUT1",
+            "path": "outputs/codex_neighborhood_pairs.tsv",
+            "semantic_type": "作者单细胞邻域统计及网络边，未取得",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "已核查Methods与活动脚本所声明的输入变换及统计语义，但作者实际输入和中间对象尚未取得，不能确认完整处理链。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M",
+            "CODEX_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "细胞、spot、窗口及切片是不同观测层次，独立生物学单位应是患者；缺样本元数据，不能由切片数推断独立患者数。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "同肿瘤多块取样和重叠窗口产生依赖；没有取得实际样本和结果表，无法复核重复测量处理及伪重复风险。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文逐样本计算再汇总，但患者、切片、区域、平台和批次覆盖尚未取得，不能确认混杂已被设计或模型控制。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "已核查相关Methods与脚本，未取得完整检验族、最终p值表和运行配置，不能确认跨状态对及尺度的多重检验控制。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M",
+            "CODEX_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文使用人GBM及GRCh38，用户是小鼠PDAC；缺实际基因、注释和面板列表，不能确认物种映射与程序特异性。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "已将活动实现与Methods逐项对应；尚有参数或公式差异以及缺失的输入和历史环境，参数一致性不能判为通过。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M",
+            "CODEX_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods可支持作者报告的组织关联及分析设计；不构成小鼠PDAC映射、五层普适性或缺氧因果作用的验证。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_P",
+            "CODEX_NEIGHBORHOODS_F",
+            "CODEX_NEIGHBORHOODS_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "CODEX_C01",
+          "kind": "conflict",
+          "topic": "normalization_denominator",
+          "description": "Methods将A周围B总数除以A细胞数；代码汇总后除以A所有非自身类型邻接计数。",
+          "impact": "平均邻居数与异类邻接组成比例是不同统计量，影响效应解释和Xenium迁移。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M",
+            "CODEX_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "CODEX_G01",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "作者细胞对象、配准说明、原始结果和历史运行配置未取得；当前活动调用只确认27.5微米与500次。",
+          "impact": "无法确认另一尺度的完整运行、最终mean/max边表选择及跨模态一致性；路径是占位。",
+          "evidence_refs": [
+            "CODEX_NEIGHBORHOODS_M",
+            "CODEX_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "材料冲突"
+    },
+    {
+      "analysis_id": "LAYER_GRAPH",
+      "modality": "Cross-sample multiscale state network and conceptual layers",
+      "paper_claim": {
+        "summary": "作者将跨尺度状态关系组织成缺氧相关的五层模型，Chromatin-Reg未归层；该模型不是通用细胞标签转移算法。",
+        "evidence": [
+          {
+            "evidence_id": "LAYER_GRAPH_P",
+            "lane": "paper_claim",
+            "source_id": "SRC001",
+            "locator": "L94-L111",
+            "evidence_class": "直接证据",
+            "summary": "作者将跨尺度状态关系组织成缺氧相关的五层模型，Chromatin-Reg未归层；该模型不是通用细胞标签转移算法。"
+          }
+        ]
+      },
+      "figure_panel": {
+        "ids": [
+          "Fig.6A-E"
+        ],
+        "source_mode": "visual_plus_caption",
+        "display_summary": "Fig.6包含状态关系网络、组织图像及层次示意，并与组织学区域比较；环形示意不是统一距离分箱结果。",
+        "evidence": [
+          {
+            "evidence_id": "LAYER_GRAPH_F",
+            "lane": "figure",
+            "source_id": "SRC001",
+            "locator": "L96-L98",
+            "evidence_class": "直接证据",
+            "summary": "Fig.6包含状态关系网络、组织图像及层次示意，并与组织学区域比较；环形示意不是统一距离分箱结果。"
+          },
+          {
+            "evidence_id": "LAYER_GRAPH_V",
+            "lane": "figure",
+            "source_id": "SRC005",
+            "locator": "Fig.6A-E",
+            "evidence_class": "直接证据",
+            "summary": "已查看该图原始JPG；定性核对面板构成，不估计原始数值。"
+          }
+        ]
+      },
+      "method_parameters": {
+        "summary": "Methods每种测量要求平均scaled score>0.35及至少20%样本显著；共识边含至少一种直接关系，layer网络放宽为任意两种测量支持，增加四条边并用Cytoscape构图。",
+        "evidence": [
+          {
+            "evidence_id": "LAYER_GRAPH_M",
+            "lane": "method",
+            "source_id": "SRC001",
+            "locator": "L190-L192",
+            "evidence_class": "直接证据",
+            "summary": "Methods每种测量要求平均scaled score>0.35及至少20%样本显著；共识边含至少一种直接关系，layer网络放宽为任意两种测量支持，增加四条边并用Cytoscape构图。"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "scaled_score_threshold",
+            "value": 0.35,
+            "value_status": "reported",
+            "evidence_refs": [
+              "LAYER_GRAPH_M"
+            ]
+          },
+          {
+            "name": "significant_sample_fraction",
+            "value": 0.2,
+            "value_status": "reported",
+            "evidence_refs": [
+              "LAYER_GRAPH_M"
+            ]
+          },
+          {
+            "name": "minimum_supporting_measures",
+            "value": 2,
+            "value_status": "reported",
+            "evidence_refs": [
+              "LAYER_GRAPH_M"
+            ]
+          },
+          {
+            "name": "total_measures",
+            "value": 5,
+            "value_status": "reported",
+            "evidence_refs": [
+              "LAYER_GRAPH_M"
+            ]
+          },
+          {
+            "name": "cytoscape_version",
+            "value": "3.9.1",
+            "value_status": "reported",
+            "evidence_refs": [
+              "LAYER_GRAPH_M"
+            ]
+          }
+        ]
+      },
+      "code_locations": [
+        {
+          "evidence_id": "LAYER_CODE",
+          "source_id": "SRC010",
+          "snapshot": "sha256:4bcdb4846114caf5d3ada4fc5125604c0d3a12c4427562f690ec2fb9a6022955",
+          "path": "sources/author/Module4_consensus_interactions.R",
+          "locator": "L16-L100; L194-L210",
+          "scope": "upstream_analysis",
+          "evidence_status": "active_call"
+        }
+      ],
+      "code_guidance": null,
+      "inputs_outputs": {
+        "inputs": [
+          {
+            "artifact_id": "LAYER_GRAPH_IN1",
+            "path": "inputs/per_sample_pair_summary_tables.tsv",
+            "semantic_type": "各样本同点、邻接、区域组成的Summary_tables；作者提供下载线索，本次未获取",
+            "fingerprint": null
+          }
+        ],
+        "outputs": [
+          {
+            "artifact_id": "LAYER_GRAPH_OUT1",
+            "path": "outputs/final_layer_network.tsv",
+            "semantic_type": "发表层次图的最终扩展网络、状态分层及布局对象，未取得",
+            "fingerprint": null
+          }
+        ]
+      },
+      "execution_record_ids": [],
+      "scientific_audit": [
+        {
+          "topic": "preprocessing",
+          "status": "blocked",
+          "finding": "已核查Methods与活动脚本所声明的输入变换及统计语义，但作者实际输入和中间对象尚未取得，不能确认完整处理链。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "statistical_unit",
+          "status": "blocked",
+          "finding": "细胞、spot、窗口及切片是不同观测层次，独立生物学单位应是患者；缺样本元数据，不能由切片数推断独立患者数。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "replication_pseudoreplication",
+          "status": "blocked",
+          "finding": "同肿瘤多块取样和重叠窗口产生依赖；没有取得实际样本和结果表，无法复核重复测量处理及伪重复风险。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "batch_confounding",
+          "status": "blocked",
+          "finding": "论文逐样本计算再汇总，但患者、切片、区域、平台和批次覆盖尚未取得，不能确认混杂已被设计或模型控制。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "multiple_testing",
+          "status": "blocked",
+          "finding": "已核查相关Methods与脚本，未取得完整检验族、最终p值表和运行配置，不能确认跨状态对及尺度的多重检验控制。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "species_gene_ids",
+          "status": "blocked",
+          "finding": "论文使用人GBM及GRCh38，用户是小鼠PDAC；缺实际基因、注释和面板列表，不能确认物种映射与程序特异性。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "parameter_consistency",
+          "status": "blocked",
+          "finding": "已将活动实现与Methods逐项对应；尚有参数或公式差异以及缺失的输入和历史环境，参数一致性不能判为通过。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "claim_ceiling": "not_assessable"
+        },
+        {
+          "topic": "claim_strength",
+          "status": "warning",
+          "finding": "正文、图注和Methods可支持作者报告的组织关联及分析设计；不构成小鼠PDAC映射、五层普适性或缺氧因果作用的验证。",
+          "evidence_refs": [
+            "LAYER_GRAPH_P",
+            "LAYER_GRAPH_F",
+            "LAYER_GRAPH_M"
+          ],
+          "claim_ceiling": "descriptive"
+        }
+      ],
+      "interpretation": {
+        "direct_observation": [],
+        "paper_claim": [],
+        "reconstructed_support": [],
+        "reasonable_inference": [],
+        "unverified": []
+      },
+      "conflicts_gaps": [
+        {
+          "issue_id": "LAYER_C01",
+          "kind": "conflict",
+          "topic": "selection_criteria",
+          "description": "Methods按每种测量的阈值及支持数量筛选；Module4还要求跨测量总体pair_mean>0.35的pattern为connected。",
+          "impact": "代码增加总体均值门槛，可能改变边集，无法认为已唯一复原论文网络。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "LAYER_G01",
+          "kind": "gap",
+          "topic": "final_graph_provenance",
+          "description": "已检查Modules1、2、3、4、6未定位完整的任意两种测量扩展网络到最终layer分配与Cytoscape布局代码链。",
+          "impact": "缺最终网络/会话及逐层归属依据；这不是证据证明作者其他材料不存在该信息。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        },
+        {
+          "issue_id": "LAYER_G02",
+          "kind": "gap",
+          "topic": "missing_inputs_outputs",
+          "description": "缺实际Summary_tables、最终网络及历史运行对象，所列输入输出为占位。",
+          "impact": "不能验证论文边数、层次稳定性或对小鼠PDAC的预测表现。",
+          "evidence_refs": [
+            "LAYER_GRAPH_M",
+            "LAYER_CODE"
+          ],
+          "blocking": true,
+          "resolved": false
+        }
+      ],
+      "reproduction_status": "材料冲突"
+    }
+  ],
+  "execution_records": [],
+  "overall_status": "材料冲突"
+}
